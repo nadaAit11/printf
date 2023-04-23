@@ -1,59 +1,128 @@
 #include "main.h"
 
-#define BUFFER_SIZE 1024
-
-void flush_buffer(char buffer[], int *buff_ind);
-
 /**
- * _printf - produces output according to a format
- * @format: a character string
+ * no_struct - a helper function that is called when there is a %something
+ * @c: the character passed that was after %
+ * @count: the number of count thus far. it will be incremented
+ * @argu: the va_list that is passed to us so we can va_arg it
  *
- * Return: the number of characters printed
+ * Description: NO I WILL NOT USE STRUCTS LIKE EVERYONE ESLE
+ * Return: the count tatal
+ *
+ * A: we passed that character after the %. use it as switch condition
+ * B: if it is a char, we put char and plus 1 count
+ * C: if it is a string we chack if null, if so then  we put null and plus
+ * we also put string if not null and count the stuff
+ * D: if it is an i, do  the same as a d. So we put i and let it cascade down
+ * if the number is 0 then we add 1 to count and pout a 0
+ * else we just print the number
+ * E: if it was a % then we just plus 1 and put the %
+ * F: Binary. Havent got it to work yet. it should.
+ * G: if it is r, call rev_sr function to print string is reverse.
+ * H: the default is to just print the %letter and yea...
  */
-int _printf(const char *format, ...)
+
+int no_struct(char c, int count, va_list argu)
 {
-	va_list args;
-	int buff_ind = 0;
-	int count = 0;
-	char buffer[BUFFER_SIZE];
+	int j;
+	char *s;
 
-	va_start(args, format);
-
-	if (format == NULL)
-		return (-1);
-
-	for (int i = 0 ; format[i] != '\0' ; i++)
+	switch (c)/* A */
 	{
-		if (format[i] == '%')
-			i++;
-		else
-		{
-			buffer[buff_ind++] = format[i];
-			if (buff_ind == BUFFER_SIZE)
+		case 'c':/* B */
+			j = va_arg(argu, int);
+			count += _putchar(j);
+			break;
+		case 's':/* C */
+			s = va_arg(argu, char *);
+			if (!s)
 			{
-				flush_buffer(buffer, &buff_ind);
+				_putchar('(');
+				_putchar('n');
+				_putchar('u');
+				_putchar('l');
+				_putchar('l');
+				_putchar(')');
+				count += 6;
 			}
-			count++;
-		}
+			else
+				count += _putstring(s);
+			break;
+		case 'i':/* D */
+		case 'd':
+			j = va_arg(argu, int);
+			if (!j)
+			{
+				count++;
+				_putchar('0');
+			}
+			else
+				count += print_number(j);
+			break;
+		case '%':/* E */
+			count += _putchar('%');
+			break;
+		case 'b':/* F */
+			j = va_arg(argu, int);
+			count += dec_to_binary(j);
+			break;
+		case 'r':/* G */
+			s = va_arg(argu, char *);
+			count += rev_str(s);
+			break;
+		case 'R':/* H */
+			s = va_arg(argu, char *);
+			count += rot13(s);
+			break;
+		default:/* H */
+			count += 2;
+			_putchar('%');
+			_putchar(c);
 	}
-	flush_buffer(buffer, &buff_ind);
-
-	va_end(args);
-
 	return (count);
 }
+
 /**
- * flush_buffer - prints contents of the buffer using putchar
- * @buffer: array of characters
- * @buff_ind: the size of the buffer
- * Return: nothing (void)
+ * _printf - our own printf function
+ * @format: A character string, composed of zero of more directives
+ *
+ * Description: Writes a formatted string to the standard output
+ * Return: an intger. The nulber of characters printed excluding the null byte
+ * A: if format is null then we return -1
+ * B: as long as format of index is not null, we increment
+ * C: if the index is not a percentage then we puts and count++
+ * D: EEASED TH DEEEE
+ * E: if it is not a null then we scan that letter. pass it into helper func
+ * F: its prob a null so we return -1
  */
 
-void flush_buffer(char buffer[], int *buff_ind)
+int _printf(const char *format, ...)
 {
-	for (int i = 0 ; i < *buff_ind ; i++)
+	int i = 0;
+	int count = 0;
+	va_list argu;
+
+	va_start(argu, format);
+
+	if (!format)/* A */
+		return (-1);
+
+	for (i = 0; format[i]; i++)/* B */
 	{
-		putchar(buffer[i]);
+		if (format[i] != '%')/* C */
+		{
+			coun++;
+			_putchar(format[i]);
+		}
+		else if (format[i + 1])/* E */
+		{
+			i++;
+			count = no_struct(format[i], count, argu);
+		}
+		else/* F */
+			return (-1);
 	}
-	*buff_ind = 0;
+	va_end(argu);
+	return (count);
 }
+
