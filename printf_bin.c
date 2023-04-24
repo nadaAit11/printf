@@ -32,3 +32,4 @@ int printf_bin(va_list val)
 		_putchar('0');
 	}
 	return (count);
+}
