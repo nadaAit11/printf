@@ -2,14 +2,15 @@
 
 /**
  * print_int - prints integer
- * @n: integer
+ * @args: arguments to print
  * Return: number of characters
  */
 
-int print_int(int n)
+int print_int(va_list args)
 {
+	int n = va_arg(args, int);
 	int num, last = n % 10, digit, exp = 1;
-	int n = 1;
+	int i = 1;
 
 	n = n / 10;
 	num = n;
