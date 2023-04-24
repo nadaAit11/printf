@@ -1,13 +1,13 @@
 #include "main.h"
 
 /**
- * _putstring - prints a string
+ * printf_string - prints a string
  * @s: the pointer
  *
  * Return: the string's length
  */
 
-int _putstring(char *s)
+int printf_string(char *s)
 {
 	int i = 0;
 

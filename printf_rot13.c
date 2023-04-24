@@ -1,13 +1,14 @@
 #include "main.h"
 
 /**
- * rot13 - encode into rot13
+ * printf_rot13 - encode into rot13
  * @point: string to encode
  * Return: (point)
  */
 
-int rot13(char *point)
+int printf_rot13(va_list args)
 {
+	char *s = va_arg(args, char*);
 	int i = 0, j, count = 0, flag = 0;
 
 	char lett[] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L',
@@ -20,15 +21,16 @@ int rot13(char *point)
 		'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
 		'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm'};
 
-	if (!point)
+	if (!s)
 	{
-		point = "(null)";
+		s = "(null)";
 	}
-	while (point[i])
+	while (s[i])
 	{
+		flag = 0;
 		for (j = 0; j < 52; j++)
 		{
-			if (point[i] == lett[j])
+			if (s[i] == lett[j])
 			{
 				_putchar(rot[j]);
 				count++;
@@ -37,9 +39,10 @@ int rot13(char *point)
 			}
 		}
 		if (!flag)
-			_putchar(point[i]);
-		flag = 0;
-		i++;
+		{
+			_putchar(s[i]);
+			i++;
+		}
 	}
 	return (count);
 }

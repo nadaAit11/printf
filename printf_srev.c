@@ -1,14 +1,18 @@
 #include "main.h"
 
 /**
- * rev_str - reverse a string
+ * printf_srev - reverse a string
  * @s: the string to reverse
  * Return: count of characters printed
  */
 
-int rev_str(char *s)
+int printf_srev(va_list args)
 {
 	int i, j = 0;
+	char *s = va_arg(args, char*);
+
+	if (s == NULL)
+		s = "(null)";
 
 	while (s[j])
 		j++;
