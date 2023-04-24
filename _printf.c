@@ -31,18 +31,19 @@ int no_struct(char c, int count, va_list argu)
 			count += _putchar('%');
 			break;
 		case 'd':
-			j = va_arg(argu, int);
-			if (!j)
-				count += _putchar('0');
-			else
-				count += print_number(j);
-			break;
 		case 'i':
 			j = va_arg(argu, int);
 			if (!j)
 				count += _putchar('0');
 			else
+			{
+				if (j < 0)
+				{
+					count += _putchar('-');
+					j = -j;
+				}
 				count += print_number(j);
+			}
 			break;
 		default:
 			count += 2;
