@@ -23,20 +23,26 @@ int no_struct(char c, int count, va_list argu)
 		case 's':
 			s = va_arg(argu, char *);
 			if (!s)
-			{
-				_putchar('(');
-				_putchar('n');
-				_putchar('u');
-				_putchar('l');
-				_putchar('l');
-				_putchar(')');
-				count += 6;
-			}
+				count += _putstring("(null)");
 			else
 				count += _putstring(s);
 			break;
 		case '%':
 			count += _putchar('%');
+			break;
+		case 'd':
+			j = va_arg(argu, int);
+			if (!j)
+				count += _putchar('0');
+			else
+				count += print_number(j);
+			break;
+		case 'i':
+			j = va_arg(argu, int);
+			if (!j)
+				count += _putchar('0');
+			else
+				count += print_number(j);
 			break;
 		default:
 			count += 2;
