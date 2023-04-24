@@ -1,85 +1,47 @@
 #include "main.h"
 
 /**
-* no_struct - a helper function that is called when there is a %something
-* @c: the character passed that was after %
-* @count: the number of count thus far. it will be incremented
-* @argu: the va_list that is passed to us so we can va_arg it
-*
-* Return: the count total
-*/
+ * _printf - is a function tht selects the correct function to print
+ * @format: identifier to look for.
+ * Return: the length of the string.
+ */
 
-int no_struct(char c, int count, va_list argu)
+int _printf(const char * const format, ...)
 {
-	int j;
-	char *s;
+	convert_match m[] = {
+		{"%s", printf_string}, {"%c", printf_char},
+		{"%%", printf_37},
+		{"%i", printf_int}, {"%d", printf_dec}, {"%r", printf_serv},
+		{"%R", printf_rot13}, {"%b", printf_bin}, {"%u", printf_unsigned},
+		{"%o", printf_oct}, {"%x", printf_hex}, {"%X", printf_HEX},
+		{"%S", printf_exclusive_string}, {"%p", printf_pointer}
+	};
 
-	switch (c)
-	{
-		case 'c':
-			j = va_arg(argu, int);
-			count += _putchar(j);
-			break;
-		case 's':
-			s = va_arg(argu, char *);
-			if (!s)
-			{
-				_putchar('(');
-				_putchar('n');
-				_putchar('u');
-				_putchar('l');
-				_putchar('l');
-				_putchar(')');
-				count += 6;
-			}
-			else
-				count += _putstring(s);
-			break;
-		case '%':
-			count += _putchar('%');
-			break;
-		default:
-			count += 2;
-			_putchar('%');
-			_putchar(c);
-	}
-	return (count);
-}
+	va_list args;
+	int i = 0, j, len = 0;
 
-/**
-* _printf - our own printf function
-* @format: A character string, composed of zero of more directives
-*
-* Description: Writes a formatted string to the standard output
-* Return: an integer. The number of characters printed excluding the null byte
-*/
-
-int _printf(const char *format, ...)
-{
-	int i = 0;
-	int count = 0;
-	va_list argu;
-
-	va_start(argu, format);
-
-	if (!format)
+	va_start(args, format);
+	if (format == NULL || (format[0] == '%' && format[1] == '\0'))
 		return (-1);
 
-	for (i = 0; format[i]; i++)
+Here:
+	while (format[i] != '\0')
 	{
-		if (format[i] != '%')
+		j = 13;
+		while (j >= 0)
 		{
-			count++;
-			_putchar(format[i]);
+			if (m[j].id[0] == format[i] && m[j].id[1] == format[i + 1])
+			{
+				len += m[j].f(args);
+				i = i + 2;
+				goto Here;
+			}
+			j--;
 		}
-		else if (format[i + 1])
-		{
-			i++;
-			count = no_struct(format[i], count, argu);
-		}
-		else
-			return (-1);
+		_putchar(format[i]);
+		len++;
+		i++;
 	}
-	va_end(argu);
-	return (count);
+	va_end(args);
+	return (len);
 }
