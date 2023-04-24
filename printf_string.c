@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 #include "main.h"
 
 /**
@@ -19,8 +18,7 @@ int printf_string(char *s)
 		i++;
 	}
 	return (i);
-=======
-#include "mian.h"
+}
 
 /**
  * printf_string - print a string
@@ -49,5 +47,4 @@ int printf_string(va_list val)
 			_putchar(s[i]);
 		return (len);
 	}
->>>>>>> 19958a2067fd01c4514cf0f5fb8691d256d8fb6f
 }
