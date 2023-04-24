@@ -36,7 +36,7 @@ int no_struct(char c, int count, va_list argu)
 			if (!j)
 				count += _putchar('0');
 			else
-				count += print_number(j);
+				count += print_int(j);
 			break;
 		default:
 			count += 2;
