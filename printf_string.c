@@ -1,25 +1,3 @@
-<<<<<<< HEAD
-#include "main.h"
-
-/**
- * printf_string - prints a string
- * @s: the pointer
- *
- * Return: the string's length
- */
-
-int printf_string(char *s)
-{
-	int i = 0;
-
-	while (*s != '\0')
-	{
-		_putchar(*s);
-		s++;
-		i++;
-	}
-	return (i);
-=======
 #include "mian.h"
 
 /**
@@ -49,5 +27,4 @@ int printf_string(va_list val)
 			_putchar(s[i]);
 		return (len);
 	}
->>>>>>> 19958a2067fd01c4514cf0f5fb8691d256d8fb6f
 }
