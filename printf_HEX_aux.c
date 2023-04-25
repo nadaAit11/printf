@@ -20,7 +20,8 @@ int printf_HEX_aux(unsigned int num)
 	}
 	counter++;
 	array = malloc(counter * sizeof(int));
-
+	if (array == NULL)
+		return (-1);
 	for (i = 0; i < counter; i++)
 	{
 		array[i] = temp % 16;
