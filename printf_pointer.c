@@ -27,6 +27,8 @@ int printf_pointer(va_list val)
 	a = (unsigned long int)p;
 	_putchar('0');
 	_putchar('x');
-	b = printf_hex_aux(a);
-	return (b + 2);
+
+	for (i = 0; p[i] != '\0'; i++)
+		_putchar(p[i]);
+	return (i + 2);
 }

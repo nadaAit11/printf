@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * printf_hex_aux - prints a hexgecimal number.
+ * printf_hex_aux - prints a hexadecimal number.
  * @num: arguments.
  * Return: counter.
  */
