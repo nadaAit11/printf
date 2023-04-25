@@ -8,41 +8,31 @@
 
 int printf_rot13(va_list args)
 {
+	int i, j, counter = 0;
+	int k = 0;
 	char *s = va_arg(args, char*);
-	int i = 0, j, count = 0, flag = 0;
+	char alpha[] = {"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"};
+	char beta[] = {"nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM"};
 
-	char lett[] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L',
-	'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a',
-	'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p',
-	'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
-
-	char rot[] = {'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y',
-		'Z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
-		'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
-		'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm'};
-
-	if (!s)
-	{
+	if (s == NULL)
 		s = "(null)";
-	}
-	while (s[i])
+	for (i = 0; s[i]; i++)
 	{
-		flag = 0;
-		for (j = 0; j < 52; j++)
+		k = 0;
+		for (j = 0; alpha[j] && !k; j++)
 		{
-			if (s[i] == lett[j])
+			if (s[i] == alpha[j])
 			{
-				_putchar(rot[j]);
-				count++;
-				flag = 1;
-				break;
+				_putchar(beta[j]);
+				counter++;
+				k = 1;
 			}
 		}
-		if (!flag)
+		if (!k)
 		{
 			_putchar(s[i]);
-			i++;
+			counter++;
 		}
 	}
-	return (count);
+	return (counter);
 }
