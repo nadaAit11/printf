@@ -21,6 +21,9 @@ int printf_hex_aux(unsigned long int num)
 	counter++;
 	array = malloc(counter * sizeof(long int));
 
+	if (array == NULL)
+		return (-1);
+
 	for (i = 0; i < counter; i++)
 	{
 		array[i] = temp % 16;
