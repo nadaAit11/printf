@@ -56,7 +56,8 @@ int printf_dec(va_list args)
 {
 	int n = va_arg(args, int);
 	int num, last = n % 10, digit;
-	int i = 1, exp = 1;
+	int i = 1;
+	int exp = 1;
 
 	n = n / 10;
 	num = n;
