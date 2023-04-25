@@ -22,10 +22,10 @@ int printf_HEX(va_list val)
 	counter++;
 	array = malloc(counter * sizeof(int));
 
-	for (i = 0, i < counter; i++)
+	for (i = 0; i < counter; i++)
 	{
 		array[i] = temp % 16;
-		remp /= 16;
+		temp /= 16;
 	}
 	for (i = counter - 1; i >= 0; i--)
 	{
