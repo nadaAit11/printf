@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * _printf - is a function tht selects the correct function to print
+ * _printf - is a function tht selects the correct function to print.
  * @format: identifier to look for.
  * Return: the length of the string.
  */

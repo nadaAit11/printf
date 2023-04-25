@@ -1,9 +1,9 @@
 #include "main.h"
 
 /**
- * printf_hex_aux - prints a hexgecimal number
- * @num: arguments
- * Return: counter
+ * printf_hex_aux - prints a hexgecimal number.
+ * @num: arguments.
+ * Return: counter.
  */
 
 int printf_hex_aux(unsigned long int num)

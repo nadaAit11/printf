@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * printf_string - print a string
+ * printf_string - print a string.
  * @val: argument t.
  * Return: the length of the string.
  */
@@ -15,14 +15,14 @@ int printf_string(va_list val)
 	if (s == NULL)
 	{
 		s = "(null)";
-		len = _strlenc(s);
+		len = _strlen(s);
 		for (i = 0; i < len; i++)
 			_putchar(s[i]);
 		return (len);
 	}
 	else
 	{
-		len = _strlenc(s);
+		len = _strlen(s);
 		for (i = 0; i < len; i++)
 			_putchar(s[i]);
 		return (len);

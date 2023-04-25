@@ -1,9 +1,9 @@
 #include "main.h"
 
 /**
- * printf_exclusive_string - prints exclusive strings
- * @val: argument
- * Return: the length of the string
+ * printf_exclusive_string - prints exclusive strings.
+ * @val: argument.
+ * Return: the length of the string.
  */
 
 int printf_exclusive_string(va_list val)
